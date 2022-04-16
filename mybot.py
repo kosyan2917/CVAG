@@ -3,7 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from multiprocessing import Pool
-from io import BytesIO
+from ComputerVisionAI import AI
 from PIL import Image
 import time, cv2, json, copy, numpy as np
 from fake_useragent import UserAgent
@@ -90,6 +90,7 @@ class Metamask(Selenium):
         
 class Aavegotchi(Metamask):
     def __init__(self, driver, profile_name) -> None:
+        self.ai = AI()
         self.driver = driver
         self.profile_name = str(profile_name)
         self.crystals = {
@@ -111,8 +112,6 @@ class Aavegotchi(Metamask):
             },
         }
         self.window = "Play | Gotchiverse — Mozilla Firefox"
-        
-        
     
     def go_to_site(self):
         self.driver.get("https://verse.aavegotchi.com/")
@@ -175,67 +174,13 @@ class Aavegotchi(Metamask):
         ac.click_and_hold(measure_input).move_by_offset(0, 120).release().perform()
         time.sleep(7)
     
-    def timetest(self, image):
-        sum = 0
-        for i in range(100):
-            start = time.time()
-            self._get_crystals_locations(image)
-            res = time.time() - start
-            sum += res
-        print(f"Tested:", sum / 100)
-    
-    def _get_crystals_locations(self, image):
-        data = np.fromstring(image, dtype=np.uint8)
-        image = cv2.imdecode(data, 1)
-        crystal_locations = []
-        for crystal in self.crystals:
-            lower = np.array(self.crystals[crystal]["lower"])  # BGR-code of your lowest colour
-            upper = np.array(self.crystals[crystal]["upper"])  # BGR-code of your highest colour
-            # print(crystal)
-            mask = cv2.inRange(image, lower, upper)
-            coord = cv2.findNonZero(mask)
-            if coord is not None:
-                for i in range(len(coord)):
-                    crystal_locations.append(coord[i][0].tolist())
-                    print(crystal, coord[i][0])
-        return crystal_locations
-    
-    def _get_green_channel(self, image): #delete later
-        lower = np.array(self.crystals["green"]["lower"])
-        upper = np.array(self.crystals["green"]["upper"])
-        mask = cv2.inRange(image, lower, upper)
-        return mask
-    
-    @staticmethod
-    def nearest_crystal(coords):
-        min = 1000000000000
-        target = ()
-        for coord in coords:
-            print(coord)
-            num = (coord[0][0] - 682) ** 2 + (coord[0][1] - 341) ** 2
-            if num < min:
-                min, target = num, (coord[0][0], coord[0][1])
-        return target
+    def is_playing(self):
+        try:
+            self.driver.find_element_by_xpath(".//img[@class='jsx-653981903 portal ']")
+            
         
-    def _click(self, x, y):
-        self.ac.move_to_element_with_offset(self.driver.find_element_by_tag_name('body'), 0,0)
-        self.ac.move_by_offset(x,y).click_and_hold().perform()
-        time.sleep(0.1)
-        self.ac.release().perform()
-    
-    def play(self):
-        start = time.time()
-        while True:
-            start
-            image = self.driver.get_screenshot_as_png()
-            data = np.fromstring(image, dtype=np.uint8)
-            image = cv2.imdecode(data, 1)
-            mask = self._get_green_channel(image)
-            coord = cv2.findNonZero(mask)
-            if coord is not None:
-                self._click(*self.nearest_crystal(coord))
-            print(time.time()-start)
-            start = time.time()
+            
+        
             
 def worker(account):
     profile_name, mnemonic, password = account
@@ -262,27 +207,19 @@ def worker(account):
     aavegotchi = Aavegotchi(driver, profile_name)
     
     while True:
-        # try:
-        aavegotchi.go_to_site().login()
-        if not aavegotchi.prepare_game():
-            continue
-        print("Aavegotchi go to portal")
-        if not aavegotchi.is_game_loaded():
-            print("Game Not loaded")
-            continue
-        print("Aavegotchi loaded")
-        aavegotchi.increase_vision()
-        aavegotchi.play()
-        cv2.waitKey(0)
-        if not aavegotchi.is_crystals_airdrop():
-            continue
-        print("Aavegotchi airdrop")
-        
-        aavegotchi.play_game()
-        
-        input("GG WP...")
-    # except Exception as e:
-    #   print(e)
+        try:
+            aavegotchi.go_to_site().login()
+            if not aavegotchi.prepare_game():
+                continue
+            print("Aavegotchi go to portal")
+            if not aavegotchi.is_game_loaded():
+                print("Game Not loaded")
+                continue
+            print("Aavegotchi loaded")
+            aavegotchi.increase_vision()
+            aavegotchi.play()
+        except Exception as e:
+           print(e)
 
 def make_list_from_file(file):
   with open(file, 'r') as f:

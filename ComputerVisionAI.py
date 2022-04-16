@@ -188,15 +188,13 @@ class AI:
     def play(self):
         while True:
             screenshot = self.wincap.get_screenshot()
-            masks = [screenshot for i in range(4)]
             coords = self._get_channels(screenshot)
             if coords:
                 target = self._nearest_crystals(coords)
-
-
-
                 self._move(*target)
             else:
+                self._previous_target_frames = 0
+                self._previous_target = False
                 self._reveal_key()
                 self._key_pressed_now = False
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
