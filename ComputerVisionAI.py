@@ -283,9 +283,9 @@ class AI:
                 key_to_press = VK_CODE['a']
         else:
             if y_distance > 0:
-                key_to_press = VK_CODE['w']
-            else:
                 key_to_press = VK_CODE['s']
+            else:
+                key_to_press = VK_CODE['w']
 
         if self._key_pressed_now:
             if self._key_pressed_now != key_to_press:
