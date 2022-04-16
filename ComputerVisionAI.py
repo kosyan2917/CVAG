@@ -197,7 +197,8 @@ class AI:
 
                 self.click_hold(*target)
             else:
-                win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0 , 0)
+                self._reveal_key()
+                self._key_pressed_now = False
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
             # mask2 = np.concatenate((masks[2], masks[3]), axis=1)
             # res = np.concatenate((mask1, mask2), axis=0)
@@ -266,6 +267,14 @@ class AI:
     def _move(self, x, y):
         x_distance = x - self._player[0]
         y_distance = y - self._player[1]
+        
+        if self._key_pressed_now:
+            if self._key_pressed_now == VK_CODE['d'] or self._key_pressed_now == VK_CODE['a']:
+                if abs(x_distance) > 10:
+                    return
+            else:
+                if abs(y_distance) > 10:
+                    return
         key_to_press = False
         if abs(x_distance) > abs(y_distance):
             if x_distance > 0:
@@ -281,8 +290,10 @@ class AI:
         if self._key_pressed_now:
             if self._key_pressed_now != key_to_press:
                 self._reveal_key()
-
+        
+        
         win32api.keybd_event(key_to_press, 0, 0, 0)
+        self._key_pressed_now = key_to_press
 
     def _reveal_key(self):
         win32api.keybd_event(self._key_pressed_now, 0, win32con.KEYEVENTF_KEYUP, 0)
