@@ -7,6 +7,7 @@ from ComputerVisionAI import AI
 from PIL import Image
 import time, cv2, json, copy, numpy as np
 from fake_useragent import UserAgent
+from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from WindowCapture import WindowCapture
 
@@ -26,6 +27,7 @@ class Selenium:
             options=options
         )
         self.driver = driver
+        self.driver.fullscreen_window()
         self.ac = ActionChains(driver)
         return driver
 
@@ -90,7 +92,7 @@ class Metamask(Selenium):
         
 class Aavegotchi(Metamask):
     def __init__(self, driver, profile_name) -> None:
-        self.ai = AI()
+        self.ai = AI(driver)
         self.driver = driver
         self.profile_name = str(profile_name)
         self.crystals = {
@@ -115,6 +117,7 @@ class Aavegotchi(Metamask):
     
     def go_to_site(self):
         self.driver.get("https://verse.aavegotchi.com/")
+        self.driver.find_element_by_xpath('/html/body').send_keys(Keys.F11)
         return self
     
     def login(self):
@@ -173,12 +176,6 @@ class Aavegotchi(Metamask):
         ac = ActionChains(self.driver)
         ac.click_and_hold(measure_input).move_by_offset(0, 120).release().perform()
         time.sleep(7)
-    
-    def is_playing(self):
-        try:
-            self.driver.find_element_by_xpath(".//img[@class='jsx-653981903 portal ']")
-            
-        
             
         
             
@@ -217,7 +214,7 @@ def worker(account):
                 continue
             print("Aavegotchi loaded")
             aavegotchi.increase_vision()
-            aavegotchi.play()
+            aavegotchi.ai.play()
         except Exception as e:
            print(e)
 

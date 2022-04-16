@@ -156,15 +156,12 @@ VK_CODE = {'backspace':0x08,
            '`':0xC0}
 
 class AI:
-    def __init__(self, window=None):
+    def __init__(self, driver):
+        self.driver = driver
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
         self.wincap = WindowCapture()
-        if window:
-            self.window = window
-        else:
-            self.window = None
         self.crystals = {
             "green": {  # ^
                 "lower": [0, 223, 0],
@@ -189,6 +186,8 @@ class AI:
         while True:
             screenshot = self.wincap.get_screenshot()
             coords = self._get_channels(screenshot)
+            if not self._is_playing():
+                raise Exception('Game has broken')
             if coords:
                 target = self._nearest_crystals(coords)
                 self._move(*target)
@@ -204,6 +203,12 @@ class AI:
              #   break
             cv.waitKey(1)
             
+    def _is_playing(self):
+        el = self.driver.find_elements_by_xpath(".//img[@class='jsx-653981903 portal ']")
+        if el:
+            return False
+        return True
+    
     def _get_green_channel(self, image):
         lower = np.array(self.crystals["green"]["lower"])
         upper = np.array(self.crystals["green"]["upper"])
