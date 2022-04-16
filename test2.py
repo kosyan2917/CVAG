@@ -4,6 +4,7 @@ import win32api
 import win32con
 
 from WindowCapture import *
+from  linuxWindowCapture import *
 import cv2 as cv
 import numpy as np
 
@@ -188,8 +189,8 @@ class AI:
             screenshot = self.wincap.get_screenshot()
             # cv.imshow('asdasd', screenshot)
             # cv.waitKey(0)
-            print("FPS:", 1 / (time.time() - start))
-            start = time.time()
+            # print("FPS:", 1 / (time.time() - start))
+            # start = time.time()
             coords = self._get_channels(screenshot)
             # if not self._is_playing():
             #     raise Exception('Game has broken')

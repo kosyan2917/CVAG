@@ -190,7 +190,7 @@ def worker(account):
             driver = driver_session.start_driver()
             metamask = Metamask(mnemonic, password, driver)
             metamask.install(os.path.abspath("utils/MetaMask.xpi"))
-            driver.close()  # close starter blank page
+            driver.close()  # close starter blank pagew
             time.sleep(1)
             driver.switch_to.window(driver.window_handles[0])  # switch to mm window
             print("MetaMask was started")

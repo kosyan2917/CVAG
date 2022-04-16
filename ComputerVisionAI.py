@@ -4,6 +4,7 @@ import win32api
 import win32con
 
 from WindowCapture import *
+from  linuxWindowCapture import *
 import cv2 as cv
 import numpy as np
 
@@ -161,7 +162,7 @@ class AI:
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
-        self.wincap = linuxWindowCapture()
+        self.wincap = WindowCapture()
         self.crystals = {
             "green": {  # ^
                 "lower": [0, 223, 0],
