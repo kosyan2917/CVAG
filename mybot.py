@@ -10,6 +10,7 @@ from fake_useragent import UserAgent
 from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from WindowCapture import WindowCapture
+import os
 
 class Selenium:
     def __init__(self) -> None:
@@ -188,7 +189,7 @@ def worker(account):
             driver_session = Selenium()
             driver = driver_session.start_driver()
             metamask = Metamask(mnemonic, password, driver)
-            metamask.install(r"D:\Nik\aavegotchiBot\utils\MetaMask.xpi")
+            metamask.install(os.path.abspath("utils/MetaMask.xpi"))
             driver.close()  # close starter blank page
             time.sleep(1)
             driver.switch_to.window(driver.window_handles[0])  # switch to mm window

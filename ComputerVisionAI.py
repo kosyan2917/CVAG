@@ -3,7 +3,7 @@ import time
 import win32api
 import win32con
 
-from WindowCapture import WindowCapture
+from WindowCapture import *
 import cv2 as cv
 import numpy as np
 
@@ -161,7 +161,7 @@ class AI:
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
-        self.wincap = WindowCapture()
+        self.wincap = linuxWindowCapture()
         self.crystals = {
             "green": {  # ^
                 "lower": [0, 223, 0],
@@ -183,6 +183,7 @@ class AI:
         self._player = (955, 535)
     
     def play(self):
+        start = time.time()
         while True:
             screenshot = self.wincap.get_screenshot()
             coords = self._get_channels(screenshot)
@@ -196,8 +197,10 @@ class AI:
                 self._previous_target = False
                 self._reveal_key()
                 self._key_pressed_now = False
+            print("FPS:", 1/(time.time()-start))
+            start = time.time()
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
-            # mask2 = np.concatenate((masks[2], masks[3]), axis=1)
+            # mask2 = np.concatwenate((masks[2], masks[3]), axis=1)
             # res = np.concatenate((mask1, mask2), axis=0)
             #cv.imshow("ComputerVision", mask2)
              #   break
@@ -284,7 +287,7 @@ class AI:
         #     if x_distance > 8:
         #         key_to_press = VK_CODE['d']
         #     else:
-        #         key_to_press = VK_CODE['a']
+        #         key_to_press = VK_CODE['a']wws
         # else:
         #     if y_distance > 8:
         #         key_to_press = VK_CODE['s']
