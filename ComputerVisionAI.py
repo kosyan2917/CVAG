@@ -9,6 +9,8 @@ import numpy as np
 
 class AI:
     def __init__(self, window=None):
+        self._previous_target = False
+        self._previous_target_frames = 0
         self.wincap = WindowCapture()
         if window:
             self.window = window
@@ -40,6 +42,9 @@ class AI:
             coords = self._get_channels(screenshot)
             if coords:
                 target = self._nearest_crystals(coords)
+
+
+
                 self.click_hold(*target)
             else:
                 win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP, 0 , 0)
@@ -93,8 +98,15 @@ class AI:
                 path = abs(cord[0][0]-x_offset) + abs(cord[0][1]-y_offset)
                 if path < min:
                     min, target = path, (cord[0][0], cord[0][1]+15)
-        return target
 
+        if self._previous_target != False:
+            if abs(target[0] - self._previous_target[0]) > 30 and abs(target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < 2:
+                self._previous_target_frames += 1
+                return self._previous_target
+            else:
+                self._previous_target_frames = 0
+                self._previous_target = False
+        return target
 
     def test_method(self):
         kaks = [[[1]]]
