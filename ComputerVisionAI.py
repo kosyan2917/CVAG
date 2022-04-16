@@ -195,7 +195,7 @@ class AI:
 
 
 
-                self.click_hold(*target)
+                self._move(*target)
             else:
                 self._reveal_key()
                 self._key_pressed_now = False
@@ -224,18 +224,18 @@ class AI:
             if coords is not None:
                 if crystal == "purple":
                     for coord in coords:
-                        if not (coord[0][0] <= 300 and coord[0][1] >= 780):
+                        if not (coord[0][0] <= 300 and coord[0][1] >= 775):
                             new_coords.append(coord)
                     if new_coords:
                         result.append(new_coords)
                         seing.append(crystal)
-                        #print(new_coords)
+                        print(new_coords)
                 else:
                     result.append(coords)
                     seing.append(crystal)
                     #print(coords, crystal)
             #print(result, crystal)
-        #print("Вижу:", seing)
+        print("Вижу:", seing)
         return result
 
     def _nearest_crystals(self, cords):
@@ -250,12 +250,13 @@ class AI:
                     min, target = path, (cord[0][0], cord[0][1]+15)
 
         if self._previous_target != False:
-            if abs(target[0] - self._previous_target[0]) > 30 and abs(target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < 2:
+            if abs(target[0] - self._previous_target[0]) > 30 and abs(target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < 4:
                 self._previous_target_frames += 1
                 return self._previous_target
             else:
                 self._previous_target_frames = 0
                 self._previous_target = False
+        self._previous_target = target
         return target
 
     def test_method(self):
@@ -268,32 +269,52 @@ class AI:
         x_distance = x - self._player[0]
         y_distance = y - self._player[1]
         
-        if self._key_pressed_now:
-            if self._key_pressed_now == VK_CODE['d'] or self._key_pressed_now == VK_CODE['a']:
-                if abs(x_distance) > 10:
-                    return
-            else:
-                if abs(y_distance) > 10:
-                    return
+        # if self._key_pressed_now:
+        #     if self._key_pressed_now == VK_CODE['d'] or self._key_pressed_now == VK_CODE['a']:
+        #         if abs(x_distance) > 40:
+        #             return
+        #     else:
+        #         if abs(y_distance) > 40:
+        #             return
         key_to_press = False
-        if abs(x_distance) > abs(y_distance):
-            if x_distance > 0:
+        # if abs(x_distance) > abs(y_distance):
+        #     if x_distance > 8:
+        #         key_to_press = VK_CODE['d']
+        #     else:
+        #         key_to_press = VK_CODE['a']
+        # else:
+        #     if y_distance > 8:
+        #         key_to_press = VK_CODE['s']
+        #     else:
+        #         key_to_press = VK_CODE['w']
+
+        if abs(x_distance) < abs(y_distance):
+            if y_distance > 0:
+                key_to_press = VK_CODE['s']
+            elif y_distance < 0:
+                key_to_press = VK_CODE['w']
+        else:
+
+            if y_distance > 40:
+                key_to_press = VK_CODE['s']
+            elif y_distance < -40:
+                key_to_press = VK_CODE['w']
+            elif x_distance > 8:
                 key_to_press = VK_CODE['d']
             else:
                 key_to_press = VK_CODE['a']
-        else:
-            if y_distance > 0:
-                key_to_press = VK_CODE['s']
-            else:
-                key_to_press = VK_CODE['w']
+
 
         if self._key_pressed_now:
             if self._key_pressed_now != key_to_press:
                 self._reveal_key()
-        
-        
-        win32api.keybd_event(key_to_press, 0, 0, 0)
-        self._key_pressed_now = key_to_press
+                win32api.keybd_event(key_to_press, 0, 0, 0)
+                self._key_pressed_now = key_to_press
+        else:
+            win32api.keybd_event(key_to_press, 0, 0, 0)
+            self._key_pressed_now = key_to_press
+
+
 
     def _reveal_key(self):
         win32api.keybd_event(self._key_pressed_now, 0, win32con.KEYEVENTF_KEYUP, 0)
