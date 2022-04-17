@@ -280,11 +280,11 @@ class AI:
     def _move(self, x, y, cyc_time):
         x_distance = x - self._player[0]
         y_distance = y - self._player[1]
-        if (x_distance < 100 and y_distance < 100):
+        if (abs(x_distance) < 100 and abs(y_distance < 100)):
             self.timer+=cyc_time
         else:
             self.timer = 0
-        if self.timer > 5:
+        if self.timer > 10:
             self._unstuck(x_distance,y_distance)
         else:
         # if self._key_pressed_now:
@@ -299,7 +299,7 @@ class AI:
                     key_to_press = VK_CODE['d']
                 else:
                     key_to_press = VK_CODE['a']
-            else:
+            else:a
                 if y_distance > 0:
                     key_to_press = VK_CODE['s']
                 else:
