@@ -4,7 +4,7 @@ import win32api
 import win32con
 
 from WindowCapture import *
-from  linuxWindowCapture import *
+# from  linuxWindowCapture import *
 import cv2 as cv
 import numpy as np
 
@@ -168,20 +168,23 @@ class AI:
         self.timer = 0
         self.crystals = {
             "green": {  # ^
-                "lower": [0, 210, 0],
-                "upper": [0, 248, 0]
+                "lower": [0, 220, 0],
+                "upper": [60, 248, 40]
             },
-            "lava": {  # ^d
-                "lower": [0, 0, 223],
+            "lava": {  # ^daaaaaa
+                "lower": [0, 0, 190],
                 "upper": [0, 0, 248]
             },
-            "ice": {  # ^
-                "lower": [253, 254, 0],
-                "upper": [253, 255, 34]  # if very 30,254,253
+            "ice": {  # ^d
+                "lower": [240, 240, 34],
+                "upper": [254, 254, 45]  # if very 30,254,253aa
+                #[248 249  32]
+                #[249 250  33]
+                #da
             },
             "purple": {  # ^
-                "lower": [253, 1, 122],
-                "upper": [254, 20, 185]
+                "lower": [250, 1, 122],
+                "upper": [254, 45, 185]
             },
         }
         self._player = (955, 535)
@@ -191,19 +194,35 @@ class AI:
         cyc_time = 0
         while True:
             screenshot = self.wincap.get_screenshot()
+
             # cv.imshow('asdasd', screenshot)
-            # cv.waitKey(0)
+            # if cv2.waitKey(1) == ord('q'):
+            #     cv2.destroyAllWindows()
+            #     break
             coords = self._get_channels(screenshot)
+
+
             # if not self._is_playing():
             #     raise Exception('Game has broken')
             if coords:
+                print()
+                print(screenshot[coords[0][0][0][1]][coords[0][0][0][0]])
                 target = self._nearest_crystals(coords)
                 self._move(*target, cyc_time)
             else:
-                self._previous_target_frames = 0
-                self._previous_target = False
-                self._reveal_key()
-                self._key_pressed_now = False
+                if self._previous_target != False:
+                    if self._previous_target_frames < 5:
+                        self._previous_target_frames += 1
+                        self._move(*self._previous_target, cyc_time)
+                    else:
+                        self._previous_target_frames = 0
+                        self._previous_target = False
+
+
+                        self._previous_target_frames = 0
+                        self._previous_target = False
+                        self._reveal_key()
+                        self._key_pressed_now = False
             cyc_time = time.time() - start
             start = time.time()
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
@@ -261,14 +280,7 @@ class AI:
                 if path < min:
                     min, target = path, (cord[0][0], cord[0][1] + 15)
 
-        if self._previous_target != False:
-            if abs(target[0] - self._previous_target[0]) > 30 and abs(
-                    target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < 4:
-                self._previous_target_frames += 1
-                return self._previous_target
-            else:
-                self._previous_target_frames = 0
-                self._previous_target = False
+
         self._previous_target = target
         return target
 

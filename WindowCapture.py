@@ -104,11 +104,15 @@ class WindowCapture:
 
 class kekwCapture:
     def __init__(self):
+
         self.d = d3dshot.create(capture_output="numpy", frame_buffer_size = 5)
-        # self.d.capture(target_fps=30)
+        self.d.capture(target_fps=30)
+        if len(self.d.displays) > 1:
+            self.d.display = self.d.displays[1]
+            print(self.d.display)
         time.sleep(1)
 
     def get_screenshot(self):
         # time.sleep(0.01)
         # return(cv2.cvtColor(self.d.get_latest_frame(), cv2.COLOR_RGB2BGR))
-        return(  cv2.cvtColor(self.d.screenshot(), cv2.COLOR_RGB2BGR))
+        return(cv2.cvtColor(self.d.screenshot(), cv2.COLOR_RGB2BGR))
