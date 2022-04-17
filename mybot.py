@@ -154,9 +154,11 @@ class Aavegotchi(Metamask):
                 return True
     
     def _turn_off_everything(self):
+        settings = self.driver.find_element_by_xpath(".//button")  # Поиск настроек
+        settings.click()
+        time.sleep(0.1)
         if self.driver.find_element_by_xpath(".//input[@class='jsx-1081654359']").is_selected():
-            settings = self.driver.find_element_by_xpath(".//button") #Поиск настроек
-            settings.click()
+
             checkboxes = self.driver.find_elements_by_xpath(".//span[@class='jsx-1081654359 slider']") #Вырубаем все
             for checkbox in checkboxes:
                 checkbox.click()

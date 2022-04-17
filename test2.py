@@ -8,6 +8,10 @@ from WindowCapture import *
 import cv2 as cv
 import numpy as np
 
+# from pymouse import *
+# # from schedule import every, repeat, run_pending
+#
+# m = PyMouse ()
 
 
 VK_CODE = {'backspace': 0x08,
@@ -172,8 +176,8 @@ class AI:
                 "upper": [60, 248, 40]
             },
             "lava": {  # ^daaaaaa
-                "lower": [0, 0, 190],
-                "upper": [0, 0, 248]
+                "lower": [0, 2, 190],
+                "upper": [25, 25, 248]
             },
             "ice": {  # ^d
                 "lower": [240, 240, 34],
@@ -183,18 +187,18 @@ class AI:
                 #da
             },
             "purple": {  # ^
-                "lower": [250, 1, 122],
-                "upper": [254, 45, 185]
+                "lower": [247, 1, 122],
+                "upper": [254, 37, 185]
             },
         }
-        self._player = (955, 535)
+        self._player = (950, 530)
+        # m.move(-1920 + self._player[0], self._player[1])
 
     def play(self):
         start = time.time()
         cyc_time = 0
         while True:
             screenshot = self.wincap.get_screenshot()
-
             # cv.imshow('asdasd', screenshot)
             # if cv2.waitKey(1) == ord('q'):
             #     cv2.destroyAllWindows()
@@ -212,9 +216,11 @@ class AI:
             else:
                 if self._previous_target != False:
                     if self._previous_target_frames < 5:
+                        print('иду к успеху')
                         self._previous_target_frames += 1
                         self._move(*self._previous_target, cyc_time)
                     else:
+
                         self._previous_target_frames = 0
                         self._previous_target = False
 
@@ -224,7 +230,11 @@ class AI:
                         self._reveal_key()
                         self._key_pressed_now = False
             cyc_time = time.time() - start
+
+            # print("FPS:", 1 / (time.time() - start))
             start = time.time()
+
+
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
             # mask2 = np.concatenate((masks[2], masks[3]), axis=1)
             # res = np.concatenate((mask1, mask2), axis=0)
@@ -280,8 +290,16 @@ class AI:
                 if path < min:
                     min, target = path, (cord[0][0], cord[0][1] + 15)
 
-
+        if self._previous_target != False:
+            if abs(target[0] - self._previous_target[0]) > 30 and abs(
+                    target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < 4:
+                self._previous_target_frames += 1
+                return self._previous_target
+            else:
+                self._previous_target_frames = 0
+                self._previous_target = False
         self._previous_target = target
+        self._previous_target_frames = 0
         return target
 
     def test_method(self):

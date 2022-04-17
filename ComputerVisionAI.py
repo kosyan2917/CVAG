@@ -4,7 +4,6 @@ import win32api
 import win32con
 
 from WindowCapture import *
-from  linuxWindowCapture import *
 import cv2 as cv
 import numpy as np
 
@@ -162,49 +161,68 @@ class AI:
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
-        self.wincap = WindowCapture()
+        self.wincap = kekwCapture()
+        self.timer = 0
         self.crystals = {
             "green": {  # ^
-                "lower": [0, 223, 0],
-                "upper": [0, 248, 0]
+                "lower": [0, 220, 0],
+                "upper": [60, 248, 40]
             },
-            "lava": {  # ^
-                "lower": [0, 0, 223],
-                "upper": [0, 0, 248]
+            "lava": {  # ^daaaaaa
+                "lower": [0, 2, 190],
+                "upper": [25, 25, 248]
             },
-            "ice": {  # ^
-                "lower": [253, 254, 0],
-                "upper": [253, 255, 34]  # if very 30,254,253
+            "ice": {  # ^d
+                "lower": [240, 240, 34],
+                "upper": [254, 254, 45]  # if very 30,254,253aa
+                # [248 249  32]
+                # [249 250  33]
+                # da
             },
             "purple": {  # ^
-                "lower": [253, 1, 122],
-                "upper": [254, 20, 185]
+                "lower": [247, 1, 122],
+                "upper": [254, 37, 185]
             },
         }
         self._player = (955, 535)
     
     def play(self):
         start = time.time()
+        cyc_time = 0
         while True:
-            # screenshot = self.wincap.get_screenshot()
-            # coords = self._get_channels(screenshot)
+            screenshot = self.wincap.get_screenshot()
+            # cv.imshow('asdasd', screenshot)
+            # if cv2.waitKey(1) == ord('q'):
+            #     cv2.destroyAllWindows()
+            #     break
+            coords = self._get_channels(screenshot)
+
             if not self._is_playing():
                 raise Exception('Game has broken')
-            # if coords:
-            #     target = self._nearest_crystals(coords)
-            #     self._move(*target)
-            # else:
-            #     self._previous_target_frames = 0
-            #     self._previous_target = False
-            #     self._reveal_key()
-            #     self._key_pressed_now = False
-            # print("FPS:", 1/(time.time()-start))
-            # start = time.time()
-            # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
-            # mask2 = np.concatwenate((masks[2], masks[3]), axis=1)
-            # res = np.concatenate((mask1, mask2), axis=0)
-            #cv.imshow("ComputerVision", mask2)
-             #   break
+            if coords:
+                print()
+                print(screenshot[coords[0][0][0][1]][coords[0][0][0][0]])
+                target = self._nearest_crystals(coords)
+                self._move(*target, cyc_time)
+            else:
+                if self._previous_target != False:
+                    if self._previous_target_frames < 5:
+                        self._previous_target_frames += 1
+                        self._move(*self._previous_target, cyc_time)
+                    else:
+                        self._previous_target_frames = 0
+                        self._previous_target = False
+
+                        self._previous_target_frames = 0
+                        self._previous_target = False
+                        self._reveal_key()
+                        self._key_pressed_now = False
+            cyc_time = time.time() - start
+
+            # print("FPS:", 1 / (time.time() - start))
+            start = time.time()
+
+
             time.sleep(0.05)
             cv.waitKey(1)
             
@@ -272,60 +290,63 @@ class AI:
         sss = [[[3]]]
         print(kaks + sss)
 
-
-    def _move(self, x, y):
+    def _move(self, x, y, cyc_time):
         x_distance = x - self._player[0]
         y_distance = y - self._player[1]
-        
-        # if self._key_pressed_now:
-        #     if self._key_pressed_now == VK_CODE['d'] or self._key_pressed_now == VK_CODE['a']:
-        #         if abs(x_distance) > 40:
-        #             return
-        #     else:
-        #         if abs(y_distance) > 40:
-        #             return
-        key_to_press = False
-        # if abs(x_distance) > abs(y_distance):
-        #     if x_distance > 8:
-        #         key_to_press = VK_CODE['d']
-        #     else:
-        #         key_to_press = VK_CODE['a']wws
-        # else:
-        #     if y_distance > 8:
-        #         key_to_press = VK_CODE['s']
-        #     else:
-        #         key_to_press = VK_CODE['w']
-
-        if abs(x_distance) < abs(y_distance):
-            if y_distance > 0:
-                key_to_press = VK_CODE['s']
-            elif y_distance < 0:
-                key_to_press = VK_CODE['w']
+        if (abs(x_distance) < 100 and abs(y_distance < 100)):
+            self.timer += cyc_time
+        else:
+            self.timer = 0
+        if self.timer > 10:
+            self._unstuck(x_distance, y_distance)
         else:
 
-            if y_distance > 40:
-                key_to_press = VK_CODE['s']
-            elif y_distance < -40:
-                key_to_press = VK_CODE['w']
-            elif x_distance > 8:
-                key_to_press = VK_CODE['d']
+            if abs(x_distance) > abs(y_distance):
+                if x_distance > 0:
+                    key_to_press = VK_CODE['d']
+                else:
+                    key_to_press = VK_CODE['a']
             else:
-                key_to_press = VK_CODE['a']
+                if y_distance > 0:
+                    key_to_press = VK_CODE['s']
+                else:
+                    key_to_press = VK_CODE['w']
 
 
-        if self._key_pressed_now:
-            if self._key_pressed_now != key_to_press:
-                self._reveal_key()
+
+            if self._key_pressed_now:
+                if self._key_pressed_now != key_to_press:
+                    self._reveal_key()
+                    win32api.keybd_event(key_to_press, 0, 0, 0)
+                    self._key_pressed_now = key_to_press
+            else:
                 win32api.keybd_event(key_to_press, 0, 0, 0)
                 self._key_pressed_now = key_to_press
-        else:
-            win32api.keybd_event(key_to_press, 0, 0, 0)
-            self._key_pressed_now = key_to_press
-
-
 
     def _reveal_key(self):
         win32api.keybd_event(self._key_pressed_now, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+    def _hold_key(self, key_to_press, time_to_hold):
+        run_time = 10
+        win32api.keybd_event(key_to_press, 0, 0, 0)
+        time.sleep(time_to_hold * run_time)
+        win32api.keybd_event(key_to_press, 0, win32con.KEYEVENTF_KEYUP, 0)
+
+    def _unstuck(self, x_distance, y_distance):
+        if -x_distance > 0:
+            key_to_press_x = VK_CODE['d']
+        else:
+            key_to_press_x = VK_CODE['a']
+
+        if -y_distance > 0:
+            key_to_press_y = VK_CODE['s']
+        else:
+            key_to_press_y = VK_CODE['w']
+
+        x_abs = abs(x_distance)
+        y_abs = abs(y_distance)
+        self._hold_key(key_to_press_x, x_abs / (x_abs + y_abs))
+        self._hold_key(key_to_press_y, y_abs / (x_abs + y_abs))
 
 
 if __name__ == "__main__":
