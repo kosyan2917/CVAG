@@ -8,6 +8,8 @@ from  linuxWindowCapture import *
 import cv2 as cv
 import numpy as np
 
+
+
 VK_CODE = {'backspace': 0x08,
            'tab': 0x09,
            'clear': 0x0C,
@@ -162,7 +164,7 @@ class AI:
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
-        self.wincap = linuxWindowCapture()
+        self.wincap = kekwCapture()
         self.crystals = {
             "green": {  # ^
                 "lower": [0, 223, 0],
@@ -186,11 +188,12 @@ class AI:
     def play(self):
         start = time.time()
         while True:
+            start = time.time()
             screenshot = self.wincap.get_screenshot()
             # cv.imshow('asdasd', screenshot)
             # cv.waitKey(0)
-            # print("FPS:", 1 / (time.time() - start))
-            # start = time.time()
+            print("FPS:", (time.time() - start))
+            start = time.time()
             coords = self._get_channels(screenshot)
             # if not self._is_playing():
             #     raise Exception('Game has broken')
@@ -287,32 +290,32 @@ class AI:
         #         if abs(y_distance) > 40:
         #             return
         key_to_press = False
-        # if abs(x_distance) > abs(y_distance):
-        #     if x_distance > 8:
-        #         key_to_press = VK_CODE['d']
-        #     else:
-        #         key_to_press = VK_CODE['a']wws
-        # else:
-        #     if y_distance > 8:
-        #         key_to_press = VK_CODE['s']
-        #     else:
-        #         key_to_press = VK_CODE['w']
-
-        if abs(x_distance) < abs(y_distance):
-            if y_distance > 0:
-                key_to_press = VK_CODE['s']
-            elif y_distance < 0:
-                key_to_press = VK_CODE['w']
-        else:
-
-            if y_distance > 40:
-                key_to_press = VK_CODE['s']
-            elif y_distance < -40:
-                key_to_press = VK_CODE['w']
-            elif x_distance > 8:
+        if abs(x_distance) > abs(y_distance):
+            if x_distance > 8:
                 key_to_press = VK_CODE['d']
             else:
                 key_to_press = VK_CODE['a']
+        else:
+            if y_distance > 8:
+                key_to_press = VK_CODE['s']
+            else:
+                key_to_press = VK_CODE['w']
+
+        # if abs(x_distance) < abs(y_distance):
+        #     if y_distance > 0:
+        #         key_to_press = VK_CODE['s']
+        #     elif y_distance < 0:
+        #         key_to_press = VK_CODE['w']
+        # else:
+        #
+        #     if y_distance > 40:
+        #         key_to_press = VK_CODE['s']
+        #     elif y_distance < -40:
+        #         key_to_press = VK_CODE['w']
+        #     elif x_distance > 8:
+        #         key_to_press = VK_CODE['d']
+        #     else:
+        #         key_to_press = VK_CODE['a']
 
         if self._key_pressed_now:
             if self._key_pressed_now != key_to_press:

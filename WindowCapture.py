@@ -1,5 +1,9 @@
+import time
+
 import numpy as np
 import win32gui, win32ui, win32con
+import d3dshot
+import cv2
 
 
 class WindowCapture:
@@ -96,3 +100,15 @@ class WindowCapture:
     # the __init__ constructor.
     def get_screen_position(self, pos):
         return (pos[0] + self.offset_x, pos[1] + self.offset_y)
+
+
+class kekwCapture:
+    def __init__(self):
+        self.d = d3dshot.create(capture_output="numpy", frame_buffer_size = 5)
+        # self.d.capture(target_fps=30)
+        time.sleep(1)
+
+    def get_screenshot(self):
+        # time.sleep(0.01)
+        # return(cv2.cvtColor(self.d.get_latest_frame(), cv2.COLOR_RGB2BGR))
+        return(  cv2.cvtColor(self.d.screenshot(), cv2.COLOR_RGB2BGR))

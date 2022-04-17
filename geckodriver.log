@@ -3106,3 +3106,319 @@ JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: , line 0: uncaught exception: Object
 JavaScript error: , line 0: uncaught exception: Object
+1650150886808	geckodriver	INFO	Listening on 127.0.0.1:50469
+1650150889843	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilevnKE9H"
+1650150890217	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilevnKE9H\\search.json.mozlz4", (void 0)))
+1650150892523	Marionette	INFO	Listening on port 50483
+1650150892976	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd"
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript error: undefined, line 0: Error: Invalid window ID: 39
+JavaScript error: undefined, line 0: Error: Invalid window ID: 39
+JavaScript error: undefined, line 0: Error: Invalid window ID: 39
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://337af20c-298e-4ea3-ba4d-7ffd4deae4cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript error: , line 0: InvalidStateError: Navigated away from page
+1650151818242	Marionette	INFO	Stopped listening on port 50483
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+
+###!!! [Parent][PGPUParent] Error: RunMessage(msgname=PGPU::Msg_ShutdownVR) Channel closing: too late to send/recv, messages will be lost
+
+1650151877467	geckodriver	INFO	Listening on 127.0.0.1:51844
+1650151880503	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilemVb5T7"
+1650151880848	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilemVb5T7\\search.json.mozlz4", (void 0)))
+1650151883328	Marionette	INFO	Listening on port 51855
+1650151883623	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd"
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/ui-5.js, line 10: unreachable code after return statement
+JavaScript error: moz-extension://04e79357-c3bc-401c-b1d6-b9b4941e81cd/runtime-lavamoat.js, line 8892: Error: Internal JSON-RPC error.
+1650157562387	geckodriver	INFO	Listening on 127.0.0.1:57666
+1650157565420	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileuqx2NE"
+1650157565756	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileuqx2NE\\search.json.mozlz4", (void 0)))
+1650157567936	Marionette	INFO	Listening on port 57677
+1650157568043	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://025ef819-78c1-4bda-b038-1e995ed7f3b0/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1650157573560	Marionette	INFO	Stopped listening on port 57677
+1650157573596	geckodriver	INFO	Listening on 127.0.0.1:57732
+1650157576622	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileLiFBOt"
+1650157576938	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileLiFBOt\\search.json.mozlz4", (void 0)))
+1650157579058	Marionette	INFO	Listening on port 57742
+1650157579249	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://85659924-9131-4920-bd39-5a316de8b6af/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://85659924-9131-4920-bd39-1650157587250	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileUaHOZ0"
+1650157587564	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileUaHOZ0\\search.json.mozlz4", (void 0)))
+1650157589700	Marionette	INFO	Listening on port 57826
+1650157589871	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd"
+JavaScript error: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/runtime-lavamoat.js, line 8892: Error: Internal JSON-RPC error.
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+Port.onMessage event fired while context is inactive.
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://460cb7d3-687c-45fc-b855-994543abfdbd/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+1650157645592	Marionette	INFO	Stopped listening on port 57826
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+ context is inactive.
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+1650157643784	Marionette	INFO	Stopped listening on port 57742
+JavaScript error: chrome://remote/content/marionette/cert.js, line 55: NS_ERROR_NOT_AVAILABLE: Component returned failure code: 0x80040111 (NS_ERROR_NOT_AVAILABLE) [nsICertOverrideService.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1650157657609	geckodriver	INFO	Listening on 127.0.0.1:58035
+1650157660653	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileGAjm9i"
+1650157660982	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileGAjm9i\\search.json.mozlz4", (void 0)))
+1650157663150	Marionette	INFO	Listening on port 58047
+1650157663279	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459"
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript error: undefined, line 0: Error: Invalid window ID: 39
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript error: , line 0: uncaught exception: Object
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://94cc1010-7ac7-4eac-a9c3-b3d7ad08e459/ui-5.js, line 10: unreachable code after return statement
+JavaScript error: undefined, line 0: Error: Invalid window ID: 55
+JavaScript error: undefined, line 0: Error: Invalid window ID: 55
+JavaScript error: undefined, line 0: Error: Invalid window ID: 55
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+JavaScript error: https://verse.aavegotchi.com/_next/static/chunks/8b430edb42a5be42c8b90a893a965ea5a6c06b83.34087b59f287e21242d6.js, line 1: TypeError: e is undefined
+1650184555909	geckodriver	INFO	Listening on 127.0.0.1:60051
+1650184558931	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilezyl9Sg"
+1650184559269	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilezyl9Sg\\search.json.mozlz4", (void 0)))
+1650184561379	Marionette	INFO	Listening on port 60065
+1650184561556	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+1650184561646	Marionette	INFO	Stopped listening on port 60065
+console.warn: TopSitesFeed: Failed to fetch data from Contil1650184564692	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofile8KRZbH"
+1650184564996	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofile8KRZbH\\search.json.mozlz4", (void 0)))
+1650184567225	Marionette	INFO	Listening on port 60100
+1650184567314	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://462cd17c-981c-4b9f-bc8e-db46c122707b/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+1650184572873	Marionette	INFO	Stopped listening on port 60100
+
+###!!! [Parent][PBackgroundParent] Error: Send(msgname=PBackgroundIDBDatabase::Msg_CloseAfterInvalidationComplete) Channel error: cannot send/recv
+
+1650184572911	geckodriver	INFO	Listening on 127.0.0.1:60154
+1650184575927	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofiletfKUy1"
+1650184576242	Marionette	INFO	Marionette 165018457console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofiletfKUy1\\search.json.m1650184578187	Marion1650184578449	Marionette	INFO	console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilemNW7pW\\search.json.mozlz4", (void 0)))
+1650184580534	Marionette	INFO	Listening on port 60186
+1650184580974	RemoteAgent	WARN	TLS certificate errors will be ignorJavaScript warning: moz-extension://33dc6935-0a5e-4673-8420-4312cfd750ca/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://33dc6935-0a5e-4673-8420-4312cfd750ca/ui-4.js, line 1: unreachable code after retuJavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-5.js, line 10: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659"
+1650184591983	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionetJavaScript warning: moz-extension://33dc6935-0a5e-4673-8420-4312cfd750ca/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://33dc6935-0a5e-4673-8420-4312cfd750ca/ui-4.js, line 1: unreachable code after retuJavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://824e8d55-12aa-4a52-991f-a76faaf11659/ui-5.js, line 10: unreachable code after return statement
+ce.setDisableAllSecurityChecksAndLetAttackersInterceptMyData]
+1650184612485	geckodriver	INFO	Listening on 127.0.0.1:60385
+1650184615520	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileyL2DdE"
+1650184615825	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofileyL2DdE\\search.json.mozlz4", (void 0)))
+1650184618021	Marionette	INFO	Listening on port 60398
+1650184618146	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781"
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+Port.onMessage event fired while context is inactive.
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://509d0eb1-5156-4cb2-bec7-444c02b98781/ui-5.js, line 10: unreachable code after return statement
+JavaScript error: undefined, line 0: Error: Invalid window ID: 39
+JavaScript error: undefined, line 0: Error: Invalid window ID: 39
+Port.onMessage event fired while context is inactive.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+1650189062710	geckodriver	INFO	Listening on 127.0.0.1:60768
+1650189065766	mozrunner::runner	INFO	Running command: "C:\\Program Files\\Mozilla Firefox\\firefox.exe" "--marionette" "-no-remote" "-profile" "C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilepAb7Yb"
+1650189066372	Marionette	INFO	Marionette enabled
+console.warn: SearchSettings: "get: No settings file exists, new profile?" (new NotFoundError("Could not open the file at C:\\Users\\natal\\AppData\\Local\\Temp\\rust_mozprofilepAb7Yb\\search.json.mozlz4", (void 0)))
+1650189068673	Marionette	INFO	Listening on port 60777
+1650189068941	RemoteAgent	WARN	TLS certificate errors will be ignored for this session
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/background-5.js, line 1: asm.js type error: expecting argument type declaration for 'e' of the form 'arg = arg|0' or 'arg = +arg' or 'arg = fround(arg)'
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+1650189076542	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:235:19
+TimedPromise@chrome://remote/content/marionette/sync.js:220:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1650189076542	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:235:19
+TimedPromise@chrome://remote/content/marionette/sync.js:220:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+1650189077289	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:235:19
+TimedPromise@chrome://remote/content/marionette/sync.js:220:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+console.warn: LoginRecipes: "getRecipes: falling back to a synchronous message for:" "moz-extension://71548878-88a0-4591-8fa2-967d18cce90b"
+1650189080816	Marionette	WARN	TimedPromise timed out after 500 ms: stacktrace:
+TimedPromise/<@chrome://remote/content/marionette/sync.js:235:19
+TimedPromise@chrome://remote/content/marionette/sync.js:220:10
+interaction.flushEventLoop@chrome://remote/content/marionette/interaction.js:431:10
+webdriverClickElement@chrome://remote/content/marionette/interaction.js:179:31
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+JavaScript warning: , line 0: WebGL warning: texImage: Alpha-premult and y-flip are deprecated for non-DOM-Element uploads.
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-4.js, line 1: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+JavaScript warning: moz-extension://71548878-88a0-4591-8fa2-967d18cce90b/ui-5.js, line 10: unreachable code after return statement
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+Port.onMessage event fired while context is inactive.
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+console.warn: "IGNORED REDUX ACTION:" "AUTOCOMPLETE_CLEAR"
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'
+JavaScript error: , line 0: NotFoundError: No such JSWindowActor 'DevToolsFrame'

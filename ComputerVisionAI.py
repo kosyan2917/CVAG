@@ -186,25 +186,26 @@ class AI:
     def play(self):
         start = time.time()
         while True:
-            screenshot = self.wincap.get_screenshot()
-            coords = self._get_channels(screenshot)
+            # screenshot = self.wincap.get_screenshot()
+            # coords = self._get_channels(screenshot)
             if not self._is_playing():
                 raise Exception('Game has broken')
-            if coords:
-                target = self._nearest_crystals(coords)
-                self._move(*target)
-            else:
-                self._previous_target_frames = 0
-                self._previous_target = False
-                self._reveal_key()
-                self._key_pressed_now = False
-            print("FPS:", 1/(time.time()-start))
-            start = time.time()
+            # if coords:
+            #     target = self._nearest_crystals(coords)
+            #     self._move(*target)
+            # else:
+            #     self._previous_target_frames = 0
+            #     self._previous_target = False
+            #     self._reveal_key()
+            #     self._key_pressed_now = False
+            # print("FPS:", 1/(time.time()-start))
+            # start = time.time()
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
             # mask2 = np.concatwenate((masks[2], masks[3]), axis=1)
             # res = np.concatenate((mask1, mask2), axis=0)
             #cv.imshow("ComputerVision", mask2)
              #   break
+            time.sleep(0.05)
             cv.waitKey(1)
             
     def _is_playing(self):
