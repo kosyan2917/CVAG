@@ -160,14 +160,11 @@ VK_CODE = {'backspace':0x08,
 class AI:
     def __init__(self, driver, capture):
         self.driver = driver
-        self.current_color = False
-        self._previous_target = False
-        self._previous_target_frames = 0
-        self._key_pressed_now = False
+
         self.wincap = capture
-        self.timer = 0
+
         self.skipframes = 15
-        self.exit = False
+
         self.crystals = {
             "green": {  # ^
                 "lower": [0, 220, 0],
@@ -211,6 +208,7 @@ class AI:
                 coords = self._get_channels(screenshot)
 
                 if self.exit:
+                    print('exit&&&&&&&&&&&&&&&&&&&&&&&&')
                     break
                 flag = False
                 for x in coords:
@@ -247,9 +245,16 @@ class AI:
         except Exception as e:
             print('megaerror', e)
             self.errored_play = True
+        print('вышел из потока')
     
     def play(self):
-
+        self.current_color = False
+        self._previous_target = False
+        self._previous_target_frames = 0
+        self._key_pressed_now = False
+        self.errored_play = False
+        self.timer = 0
+        self.exit = False
         threading.Thread(target=self.play_real(), args=()).start()
         # self.play_real()
         while True:
@@ -257,18 +262,21 @@ class AI:
                 self.exit = True
                 raise Exception('Game has broken')
             if self.errored_play:
-                raise Exception('Game has broken')
+                raise Exception('Game has broken2')
             time.sleep(1)
             
     def _is_playing(self):
         el = self.driver.find_elements_by_xpath(".//img[@class='jsx-653981903 portal ']")
         if el:
+            print('found portal')
             return False
         el = self.driver.find_elements_by_xpath("//*[text()='An unexpected error has occurred']")
         if el:
+            print('found error')
             return False
         el = self.driver.find_elements_by_xpath("//*[text()='connect wallet']")
         if el:
+            print('found connect wallet')
             return False
         return True
     
