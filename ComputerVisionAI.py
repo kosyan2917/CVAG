@@ -158,13 +158,13 @@ VK_CODE = {'backspace':0x08,
            '`':0xC0}
 
 class AI:
-    def __init__(self, driver):
+    def __init__(self, driver, capture):
         self.driver = driver
         self.current_color = False
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
-        self.wincap = kekwCapture()
+        self.wincap = capture
         self.timer = 0
         self.skipframes = 15
         self.exit = False

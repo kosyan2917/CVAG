@@ -14,6 +14,9 @@ from collections import defaultdict
 from WindowCapture import WindowCapture
 import os
 import undetected_chromedriver as uc
+from WindowCapture import *
+
+capture = kekwCapture()
 
 class Selenium:
     def __init__(self) -> None:
@@ -121,7 +124,7 @@ class Metamask(Selenium):
         
 class Aavegotchi(Metamask):
     def __init__(self, driver, profile_name) -> None:
-        self.ai = AI(driver)
+        self.ai = AI(driver, capture)
         self.driver = driver
         self.profile_name = str(profile_name)
         self.crystals = {
@@ -199,7 +202,7 @@ class Aavegotchi(Metamask):
         exit.click()
     
     def is_game_loaded(self):
-        return bool(self.take_element(".input[value='35']", 100, delay=10)) # check for loading game
+        return bool(self.take_element(".input[value='35']", 30, delay=10)) # check for loading game
     
     def increase_vision(self):
         self.increase_measure()
@@ -215,11 +218,11 @@ class Aavegotchi(Metamask):
         time.sleep(7)
             
         
-            
+
 def worker(account):
     profile_name, mnemonic, password = account
     print("Start with:", profile_name, mnemonic, password)
-    
+
     while True:
         try:
             driver_session = Selenium()
@@ -239,7 +242,7 @@ def worker(account):
         except Exception as e:
             print(e)
     aavegotchi = Aavegotchi(driver, profile_name)
-    
+
     while True:
         try:
             aavegotchi.go_to_site().login()
@@ -262,7 +265,9 @@ def make_list_from_file(file):
 
 if __name__ == "__main__":
     mnemonics = make_list_from_file("accounts.txt")
+
     accounts = [(str(i + 1), mnemonics[i], "vegotchi" + str(i + 1)) for i in range(len(mnemonics))]
     print(accounts)
+
     p = Pool(processes=len(accounts))
     p.map(worker, accounts)
