@@ -1,7 +1,9 @@
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
+from selenium.webdriver.chrome.options import Options
 from multiprocessing import Pool
 from ComputerVisionAI import AI
 from PIL import Image
@@ -11,31 +13,50 @@ from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from WindowCapture import WindowCapture
 import os
+import undetected_chromedriver as uc
 
 class Selenium:
     def __init__(self) -> None:
         pass
 
     def start_driver(self):
-        options = webdriver.FirefoxOptions()
+        options = Options()
 
-        options.set_preference("general.useragent.override", UserAgent().firefox)
-        options.set_preference('intl.accept_languages', 'en-US, en')
+        # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36")
+        # options.set_preference('intl.accept_languages', 'en-US, en')
         # options.add_argument("--headless")
         # fp = webdriver.FirefoxProfile(r'C:\Users\den\AppData\Roaming\Mozilla\Firefox\Profiles\p84efvee.vegotchi1')
-        driver = webdriver.Firefox(
-            executable_path="utils\\geckodriver.exe",
-            options=options
-        )
-        self.driver = driver
-        self.driver.fullscreen_window()
-        self.ac = ActionChains(driver)
-        return driver
+
+        options.add_extension('./utils/MetaMask.crx')
+        self.driver = uc.Chrome(executable_path='./utils/chromedriver.exe',chrome_options=options)
+        # driver = webdriver.Firefox(
+        #     executable_path="utils\\geckodriver.exe",
+        #     options=options
+        # )
+
+        # self.driver.fullscreen_window()
+        self.ac = ActionChains(self.driver)
+        return self.driver
 
     def take_element(self, path, timeout=20, delay=0):
         element = ""
         try:
             element = WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(("css selector", path)))
+        except Exception as e:
+            print(f"No element after {timeout} seconds of waiting!!!")
+            return None
+        if element is not None:
+            time.sleep(delay)
+            return element
+        else: print(f"NO SUCH ELEMENT!\n Path: {path}")
+        self.driver.execute_script("""document.body.style.backgroundColor = 'green'""")
+        input()
+
+    def take_elements(self, path, timeout=20, delay=0):
+        element = ""
+        try:
+            WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(("css selector", path)))
+            element = self.driver.find_elements_by_css_selector(path)
         except Exception as e:
             print(f"No element after {timeout} seconds of waiting!!!")
             return None
@@ -69,13 +90,20 @@ class Metamask(Selenium):
         self.driver.install_addon(url, temporary=True)
     
     def restore_wallet(self):
+        print('mn', self.mnemonic)
         self.take_element("button").click()  # enter mm
         self.take_element("button").click()  # choose restoration by mnemonic
         self.take_element("button").click()  # don't send telemetry
-        self.take_element("input").send_keys(self.mnemonic)  # put mnemonic
+        # print(self.take_elements("input"))
+        inputs = self.take_elements("input")
+        i = 0
+        for word in self.mnemonic.split():
+            inputs[i].send_keys(word)
+            i+=2
+        # self.take_elements("input").send_keys(self.mnemonic)  # put mnemonic
         self.take_element("#password").send_keys(self.password)  # put password
         self.take_element("#confirm-password").send_keys(self.password)  # repeat password
-        self.take_element(".first-time-flow__terms").click()  # agree terms
+        self.take_element(".check-box").click()  # agree terms
         self.take_element("button").click()  # login to mm
         self.take_element("button[role='button']").click()  # access invitation
     
@@ -141,10 +169,15 @@ class Aavegotchi(Metamask):
     
     def prepare_game(self):
         self._turn_off_everything()
+        time.sleep(1)
         self.take_element('.lazyload-wrapper').click() # choose aavegotchi
+        print('clicked av')
         for i in range(4):
-            portal = self.take_element('.selected-gotchi-container', delay=1) # choose portal
+            portal = self.take_element('.selected-gotchi-container', delay=2) # choose portal
+            print(portal)
             portal.click() # go to portal
+            print('clicked port')
+            time.sleep(2)
             self.driver.switch_to.window(self.driver.window_handles[1])# go to mm window
             self.take_element('.btn-primary').click() # sign mm
             self.driver.switch_to.window(self.driver.window_handles[0])# go to main window
@@ -162,8 +195,8 @@ class Aavegotchi(Metamask):
             checkboxes = self.driver.find_elements_by_xpath(".//span[@class='jsx-1081654359 slider']") #Вырубаем все
             for checkbox in checkboxes:
                 checkbox.click()
-            exit = self.driver.find_element_by_xpath(".//button[@class='jsx-3937147940 button-container   ']") #Выходим
-            exit.click()
+        exit = self.driver.find_element_by_xpath(".//button[@class='jsx-3937147940 button-container   ']") #Выходим
+        exit.click()
     
     def is_game_loaded(self):
         return bool(self.take_element(".input[value='35']", 100, delay=10)) # check for loading game
@@ -192,14 +225,14 @@ def worker(account):
             driver_session = Selenium()
             driver = driver_session.start_driver()
             metamask = Metamask(mnemonic, password, driver)
-            metamask.install(os.path.abspath("utils/MetaMask.xpi"))
+            # metamask.install(os.path.abspath("utils/MetaMask.xpi"))
             driver.close()  # close starter blank pagew
             time.sleep(1)
             driver.switch_to.window(driver.window_handles[0])  # switch to mm window
             print("MetaMask was started")
             metamask.restore_wallet()
             print("add Polygon")
-            metamask.add_network("Matic Mainnet", "https://rpc-mainnet.maticvigil.com/", "137", "MATIC",
+            metamask.add_network("Matic Mainnet", "https://rpc-mainnet.matic.quiknode.pro", "137", "MATIC",
                                  "https://explorer.matic.network/")
             print("Polygon added")
             break
@@ -210,6 +243,7 @@ def worker(account):
     while True:
         try:
             aavegotchi.go_to_site().login()
+            print('logged')
             if not aavegotchi.prepare_game():
                 continue
             print("Aavegotchi go to portal")

@@ -106,7 +106,7 @@ class kekwCapture:
     def __init__(self):
 
         self.d = d3dshot.create(capture_output="numpy", frame_buffer_size = 5)
-        self.d.capture(target_fps=30)
+        self.d.capture(target_fps=60, region=(0, 0, 1920, 1080))
         if len(self.d.displays) > 1:
             self.d.display = self.d.displays[1]
             print(self.d.display)
@@ -114,5 +114,7 @@ class kekwCapture:
 
     def get_screenshot(self):
         # time.sleep(0.01)
-        # return(cv2.cvtColor(self.d.get_latest_frame(), cv2.COLOR_RGB2BGR))
-        return(cv2.cvtColor(self.d.screenshot(), cv2.COLOR_RGB2BGR))
+        # return self.d.screenshot(region=(0, 0, 1920, 1080))e
+        return self.d.get_latest_frame()
+        return(cv2.cvtColor(self.d.get_latest_frame(), cv2.COLOR_RGB2BGR))
+        # return(cv2.cvtColor(self.d.screenshot(), cv2.COLOR_RGB2BGR))

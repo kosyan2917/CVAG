@@ -1,7 +1,8 @@
 import time
-
+from multiprocessing import Process
 import win32api
 import win32con
+import concurrent.futures
 
 from WindowCapture import *
 # from  linuxWindowCapture import *
@@ -161,17 +162,16 @@ VK_CODE = {'backspace': 0x08,
            "'": 0xDE,
            '`': 0xC0}
 
-
+count = cv2.cuda.getCudaEnabledDeviceCount()
+print(count)
 class AI:
     def __init__(self):
         # self.driver = driver
-        self.current_color = False
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
         self.wincap = kekwCapture()
         self.timer = 0
-        self.skipframes = 15
         self.crystals = {
             "green": {  # ^
                 "lower": [0, 220, 0],
@@ -184,9 +184,9 @@ class AI:
             "ice": {  # ^d
                 "lower": [34, 240, 240],
                 "upper": [45, 254, 254]  # if very 30,254,253aa
-                #[248 249  32]
-                #[249 250  33]
-                #da
+                # [248 249  32]
+                # [249 250  33]
+                # da
             },
             "purple": {  # ^
                 "lower": [122, 1, 247],
@@ -195,6 +195,17 @@ class AI:
         }
         self._player = (961, 542)
         # m.move(-1920 + self._player[0], self._player[1])
+
+    def run_cpu_tasks_in_parallel(self, tasks):
+        res = np.array([])
+        running_tasks = [Process(target=task) for task in tasks]
+        for running_task in running_tasks:
+            running_task.start()
+        for running_task in running_tasks:
+            running_task.join()
+            # np.append(res, running_task.join())
+        return res
+
 
     def play(self):
         start = time.time()
@@ -205,34 +216,26 @@ class AI:
             # if cv2.waitKey(1) == ord('q'):
             #     cv2.destroyAllWindows()
             #     break
-            # print('src', time.time() - start)
+            print('src', time.time() - start)
             coords = self._get_channels(screenshot)
-
 
             # if not self._is_playing():
             #     raise Exception('Game has broken')
-            flag = False
-            for x in coords:
-                if coords[x]:
-                    flag = True
-                    break
-            if flag:
-
+            if coords:
+                print()
+                print(screenshot[coords[0][0][0][1]][coords[0][0][0][0]])
                 target = self._nearest_crystals(coords)
                 self._move(*target, cyc_time)
             else:
                 if self._previous_target != False:
-                    if self._previous_target_frames < self.skipframes:
-                        # print('иду к успеху')
+                    if self._previous_target_frames < 5:
+                        print('иду к успеху')
                         self._previous_target_frames += 1
                         self._move(*self._previous_target, cyc_time)
                     else:
 
                         self._previous_target_frames = 0
                         self._previous_target = False
-                        self.current_color = False
-                        print('stop')
-
 
                         self._previous_target_frames = 0
                         self._previous_target = False
@@ -240,9 +243,8 @@ class AI:
                         self._key_pressed_now = False
             cyc_time = time.time() - start
 
-            # s("FPS:", time.time() - start)
+            print("FPS:", time.time() - start)
             start = time.time()
-
 
             # mask1 = np.concatenate((masks[0], masks[1]), axis=1)
             # mask2 = np.concatenate((masks[2], masks[3]), axis=1)
@@ -263,68 +265,71 @@ class AI:
         return mask
 
     def _get_channels(self, image):
-        result = {}
+        result = []
         seing = []
-        if self.current_color:
-            crystal = self.current_color
-            result[crystal] = []
+
+        t1 = time.time()
+        # hue = image[..., 0]
+
+        (rows1, cols1) = np.where(np.logical_and(np.logical_and(np.logical_and(image[..., 0] >= 0, image[..., 0] <= 40),
+                                                 np.logical_and(image[..., 2] >= 0, image[..., 2] <= 60)),
+                                                 np.logical_and(image[..., 1] >= 0, image[..., 1] <= 40)))
+        print(rows1, cols1)
+        # print(hue)
+        print(time.time() - t1)
+        input()
+
+        t1 = time.time()
+        future = []
+        for crystal in self.crystals:
+
             lower = np.array(self.crystals[crystal]["lower"])  # BGR-code of your lowest colour
             upper = np.array(self.crystals[crystal]["upper"])  # BGR-code of your highest colour
-            mask = cv.inRange(image, lower, upper)
-            coords = cv.findNonZero(mask)
-            new_coords = []
-            if coords is not None:
-                if crystal == "purple":
-                    for coord in coords:
-                        if not (coord[0][0] <= 300 and coord[0][1] >= 775):
-                            new_coords.append(coord)
-                    if new_coords:
-                        result[crystal].append(new_coords)
-                        seing.append(crystal)
-                        # print(new_coords)
-                else:
-                    result[crystal].append(coords)
-                    seing.append(crystal)
-        else:
-            for crystal in self.crystals:
-                result[crystal] = []
-                lower = np.array(self.crystals[crystal]["lower"])  # BGR-code of your lowest colour
-                upper = np.array(self.crystals[crystal]["upper"])  # BGR-code of your highest colour
-                mask = cv.inRange(image, lower, upper)
-                coords = cv.findNonZero(mask)
-                new_coords = []
-                if coords is not None:
-                    if crystal == "purple":
-                        for coord in coords:
-                            if not (coord[0][0] <= 300 and coord[0][1] >= 775):
-                                new_coords.append(coord)
-                        if new_coords:
-                            result[crystal].append(new_coords)
-                            seing.append(crystal)
-                            # print(new_coords)
-                    else:
-                        result[crystal].append(coords)
-                        seing.append(crystal)
-                        # print(coords, crystal)a
-                # print(result, crystal)
+
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                future.append(executor.submit(lambda image, lower, upper: cv.findNonZero(cv.inRange(image, lower, upper)), image, lower, upper))
+
+
+        for x in future:
+            return_value = x.result()
+            print(return_value)
+        print(time.time() - t1)
+        input()
+            # mask = cv.inRange(image, lower, upper)
+            # coords = cv.findNonZero(mask)
+            # new_coords = []
+            # if coords is not None:
+            #     if crystal == "purple":
+            #         for coord in coords:
+            #             if not (coord[0][0] <= 300 and coord[0][1] >= 775):
+            #                 new_coords.append(coord)
+            #         if new_coords:
+            #             result.append(new_coords)
+            #             seing.append(crystal)
+            #             print(new_coords)
+            #     else:
+            #         result.append(coords)
+            #         seing.append(crystal)
+                    # print(coords, crystal)
+            # print(result, crystal)
+
+        print("Вижу:", seing)
         return result
 
     def _nearest_crystals(self, cords):
         x_offset, y_offset = self._player[0], self._player[1]
         min = 10000
-        cur_crystal = False
         # print(cords, "cords")
-        for crystal in cords:
-            for mas in cords[crystal]:
-                # print(mas, type(mas), "mas")
-                for cord in mas:
-                    path = abs(cord[0][0] - x_offset) + abs(cord[0][1] - y_offset)
-                    if path < min:
-                        min, target, cur_crystal = path, (cord[0][0], cord[0][1] + 15), crystal
+        for mas in cords:
+            # print(mas, type(mas), "mas")
+            for cord in mas:
+                path = abs(cord[0][0] - x_offset) + abs(cord[0][1] - y_offset)
+                if path < min:
+                    min, target = path, (cord[0][0], cord[0][1] + 15)
 
         if self._previous_target != False:
             if abs(target[0] - self._previous_target[0]) > 30 and abs(
-                    target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < self.skipframes:
+                    target[1] - self._previous_target[1]) > 30 and self._previous_target_frames < 4:
                 self._previous_target_frames += 1
                 return self._previous_target
             else:
@@ -332,7 +337,6 @@ class AI:
                 self._previous_target = False
         self._previous_target = target
         self._previous_target_frames = 0
-        self.current_color = cur_crystal
         return target
 
     def test_method(self):
@@ -344,19 +348,19 @@ class AI:
         x_distance = x - self._player[0]
         y_distance = y - self._player[1]
         if (abs(x_distance) < 100 and abs(y_distance < 100)):
-            self.timer+=cyc_time
+            self.timer += cyc_time
         else:
             self.timer = 0
         if self.timer > 10:
-            self._unstuck(x_distance,y_distance)
+            self._unstuck(x_distance, y_distance)
         else:
-        # if self._key_pressed_now:
-        #     if self._key_pressed_now == VK_CODE['d'] or self._key_pressed_now == VK_CODE['a']:
-        #         if abs(x_distance) > 40:
-        #             return
-        #     else:
-        #         if abs(y_distance) > 40:
-        #             return
+            # if self._key_pressed_now:
+            #     if self._key_pressed_now == VK_CODE['d'] or self._key_pressed_now == VK_CODE['a']:
+            #         if abs(x_distance) > 40:
+            #             return
+            #     else:
+            #         if abs(y_distance) > 40:
+            #             return
             if abs(x_distance) > abs(y_distance):
                 if x_distance > 0:
                     key_to_press = VK_CODE['d']
@@ -367,7 +371,7 @@ class AI:
                     key_to_press = VK_CODE['s']
                 else:
                     key_to_press = VK_CODE['w']
-    
+
             # if abs(x_distance) < abs(y_distance):
             #     if y_distance > 0:
             #         key_to_press = VK_CODE['s']
@@ -383,7 +387,7 @@ class AI:
             #         key_to_press = VK_CODE['d']
             #     else:
             #         key_to_press = VK_CODE['a']
-    
+
             if self._key_pressed_now:
                 if self._key_pressed_now != key_to_press:
                     self._reveal_key()
@@ -395,13 +399,13 @@ class AI:
 
     def _reveal_key(self):
         win32api.keybd_event(self._key_pressed_now, 0, win32con.KEYEVENTF_KEYUP, 0)
-        
+
     def _hold_key(self, key_to_press, time_to_hold):
         run_time = 10
         win32api.keybd_event(key_to_press, 0, 0, 0)
         time.sleep(time_to_hold * run_time)
         win32api.keybd_event(key_to_press, 0, win32con.KEYEVENTF_KEYUP, 0)
-        
+
     def _unstuck(self, x_distance, y_distance):
         if -x_distance > 0:
             key_to_press_x = VK_CODE['d']
@@ -412,12 +416,13 @@ class AI:
             key_to_press_y = VK_CODE['s']
         else:
             key_to_press_y = VK_CODE['w']
-            
+
         x_abs = abs(x_distance)
         y_abs = abs(y_distance)
-        self._hold_key(key_to_press_x, x_abs/(x_abs+y_abs))
-        self._hold_key(key_to_press_y, y_abs/(x_abs+y_abs))
+        self._hold_key(key_to_press_x, x_abs / (x_abs + y_abs))
+        self._hold_key(key_to_press_y, y_abs / (x_abs + y_abs))
         self.timer = 0
+
 
 if __name__ == "__main__":
     ai = AI()
