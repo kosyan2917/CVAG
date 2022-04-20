@@ -13,6 +13,7 @@ from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from WindowCapture import WindowCapture
 import os
+import threading
 import undetected_chromedriver as uc
 from WindowCapture import *
 
@@ -269,5 +270,10 @@ if __name__ == "__main__":
     accounts = [(str(i + 1), mnemonics[i], "vegotchi" + str(i + 1)) for i in range(len(mnemonics))]
     print(accounts)
 
-    p = Pool(processes=len(accounts))
-    p.map(worker, accounts)
+    for acc in accounts:
+        threading.Thread(target=worker, args=(acc,)).start()
+
+    while True:
+        time.sleep(10)
+    # p = Pool(processes=len(accounts))
+    # p.map(worker, accounts)

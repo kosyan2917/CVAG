@@ -203,10 +203,12 @@ class AI:
         cyc_time = 0
         try:
             while True:
+
+
                 screenshot = self.wincap.get_screenshot()
-
+                # start1 = time.time()
                 coords = self._get_channels(screenshot)
-
+                # print("getcoords", time.time() - start1)
                 if self.exit:
                     print('exit&&&&&&&&&&&&&&&&&&&&&&&&')
                     break
@@ -238,7 +240,7 @@ class AI:
                             self._key_pressed_now = False
                 cyc_time = time.time() - start
 
-                # s("FPS:", time.time() - start)
+                # print("FPS:", time.time() - start)
                 start = time.time()
 
 
@@ -256,7 +258,6 @@ class AI:
         self.timer = 0
         self.exit = False
         threading.Thread(target=self.play_real(), args=()).start()
-        # self.play_real()
         while True:
             if not self._is_playing():
                 self.exit = True
@@ -266,15 +267,15 @@ class AI:
             time.sleep(1)
             
     def _is_playing(self):
-        el = self.driver.find_elements_by_xpath(".//img[@class='jsx-653981903 portal ']")
+        el = self.driver.find_elements_by_css_selector(".portal")
         if el:
             print('found portal')
             return False
-        el = self.driver.find_elements_by_xpath("//*[text()='An unexpected error has occurred']")
+        el = self.driver.find_elements_by_xpath("//*[contains(text(),'unexpected error')]")
         if el:
             print('found error')
             return False
-        el = self.driver.find_elements_by_xpath("//*[text()='connect wallet']")
+        el = self.driver.find_elements_by_xpath("//*[contains(text(),'connect wallet')]")
         if el:
             print('found connect wallet')
             return False
@@ -331,6 +332,7 @@ class AI:
                         seing.append(crystal)
                         # print(coords, crystal)a
                 # print(result, crystal)
+        # print('вижу', seing)
         return result
 
     def _nearest_crystals(self, cords):
@@ -405,14 +407,14 @@ class AI:
 
     def _unstuck(self, x_distance, y_distance):
         if -x_distance > 0:
-            key_to_press_x = VK_CODE['d']
+            key_to_press_x = 'd'
         else:
-            key_to_press_x = VK_CODE['a']
+            key_to_press_x = 'a'
 
         if -y_distance > 0:
-            key_to_press_y = VK_CODE['s']
+            key_to_press_y = 's'
         else:
-            key_to_press_y = VK_CODE['w']
+            key_to_press_y = 'w'
 
         x_abs = abs(x_distance)
         y_abs = abs(y_distance)

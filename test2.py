@@ -240,7 +240,7 @@ class AI:
                         self._key_pressed_now = False
             cyc_time = time.time() - start
 
-            # s("FPS:", time.time() - start)
+            print("FPS:", time.time() - start)
             start = time.time()
 
 
