@@ -29,6 +29,7 @@ class Selenium:
         # options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.127 Safari/537.36")
         # options.set_preference('intl.accept_languages', 'en-US, en')
         # options.add_argument("--headless")
+        options.add_argument("--force-color-profile=srgb")
         # fp = webdriver.FirefoxProfile(r'C:\Users\den\AppData\Roaming\Mozilla\Firefox\Profiles\p84efvee.vegotchi1')
 
         options.add_extension('./utils/MetaMask.crx')
@@ -238,7 +239,7 @@ def worker(account):
             print("MetaMask was started")
             metamask.restore_wallet()
             print("add Polygon")
-            metamask.add_network("Matic Mainnet", "https://rpc-mainnet.matic.quiknode.pro", "137", "MATIC",
+            metamask.add_network("Matic Mainnet", "https://rpc-mainnet.matic.quiknode.pro/", "137", "MATIC",
                                  "https://explorer.matic.network/")
             print("Polygon added")
             break

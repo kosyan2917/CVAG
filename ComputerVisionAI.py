@@ -16,12 +16,12 @@ class AI:
 
         self.wincap = capture
 
-        self.skipframes = 1
+        self.skipframes = 3
 
         self.crystals = {
             "green": {  # ^
-                "lower": [36, 252, 59],
-                "upper": [38, 254, 61]
+                "lower": [0, 255, 0],
+                "upper": [0, 255, 0]
             },
             # "lava": {  # ^daaaaaa
             #     "lower": [190, 2, 0],
@@ -80,7 +80,7 @@ class AI:
 
                             self._previous_target_frames = 0
                             self._previous_target = False
-                            # print('stop')
+                            print('stop')
                             self._reveal_key()
                             self._key_pressed_now = False
                     else:
