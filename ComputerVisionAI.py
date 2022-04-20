@@ -203,6 +203,7 @@ class AI:
         cyc_time = 0
         try:
             while True:
+                cyc_time_reset = False
 
 
                 screenshot = self.wincap.get_screenshot()
@@ -220,13 +221,13 @@ class AI:
                 if flag:
 
                     target = self._nearest_crystals(coords)
-                    self._move(*target, cyc_time)
+                    cyc_time_reset = self._move(*target, cyc_time)
                 else:
                     if self._previous_target != False:
                         if self._previous_target_frames < self.skipframes:
                             # print('иду к успеху')
                             self._previous_target_frames += 1
-                            self._move(*self._previous_target, cyc_time)
+                            cyc_time_reset = self._move(*self._previous_target, cyc_time)
                         else:
 
                             self._previous_target_frames = 0
@@ -238,7 +239,11 @@ class AI:
                             self._previous_target = False
                             self._reveal_key()
                             self._key_pressed_now = False
-                cyc_time = time.time() - start
+
+                if cyc_time_reset:
+                    cyc_time = 0
+                else:
+                    cyc_time = time.time() - start
 
                 # print("FPS:", time.time() - start)
                 start = time.time()
@@ -371,6 +376,7 @@ class AI:
             self.timer = 0
         if self.timer > 10:
             self._unstuck(x_distance, y_distance)
+            return True
         else:
 
             if abs(x_distance) > abs(y_distance):
@@ -394,13 +400,14 @@ class AI:
             else:
                 self.action_key_down[key_to_press].perform()
                 self._key_pressed_now = key_to_press
+            return False
 
     def _reveal_key(self):
         # win32api.keybd_event(self._key_pressed_now, 0, win32con.KEYEVENTF_KEYUP, 0)
         self.action_key_up[self._key_pressed_now].perform()
 
     def _hold_key(self, key_to_press, time_to_hold):
-        run_time = 10
+        run_time = 15
         self.action_key_down[key_to_press].perform()
         time.sleep(time_to_hold * run_time)
         self.action_key_up[key_to_press].perform()
@@ -421,7 +428,7 @@ class AI:
         self._hold_key(key_to_press_x, x_abs / (x_abs + y_abs))
         self._hold_key(key_to_press_y, y_abs / (x_abs + y_abs))
 
-        self.timer = 0
+        self._previous_target = False
 
 
 if __name__ == "__main__":
