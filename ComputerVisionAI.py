@@ -259,7 +259,7 @@ class AI:
         self.errored_play = False
         self.timer = 0
         self.exit = False
-        threading.Thread(target=self.play_real(), args=()).start()
+        threading.Thread(target=self.play_real, args=()).start()
         while True:
             if not self._is_playing():
                 self.exit = True
@@ -271,7 +271,6 @@ class AI:
     def _is_playing(self):
         el = self.driver.find_elements_by_css_selector(".portal")
         if el:
-            print('found portal')
             return False
         el = self.driver.find_elements_by_xpath("//*[contains(text(),'unexpected error')]")
         if el:
