@@ -20,8 +20,8 @@ class AI:
 
         self.crystals = {
             "green": {  # ^
-                "lower": [0, 254, 0],
-                "upper": [0, 255, 0]
+                "lower": [37, 253, 60],
+                "upper": [37, 253, 60]
             },
             # "lava": {  # ^daaaaaa
             #     "lower": [190, 2, 0],
@@ -148,7 +148,8 @@ class AI:
 
         mask = self._get_green_channel(image)
         coords = cv.findNonZero(mask)
-        print(coords)
+
+
         return coords
         if self.current_color:
             crystal = self.current_color
@@ -199,12 +200,12 @@ class AI:
         x_offset, y_offset = self._player[0], self._player[1]
         min = 10000
         # print(cords, "cords")
-        for mas in cords:
-            # print(mas, type(mas), "mas")
-            for cord in mas:
-                path = abs(cord[0][0] - x_offset) + abs(cord[0][1] - y_offset)
-                if path < min:
-                    min, target = path, (cord[0][0], cord[0][1] + 15)
+
+        for cord in cords:
+            path = abs(cord[0][0] - x_offset) + abs(cord[0][1] - y_offset)
+            if path < min:
+                min, target = path, (cord[0][0], cord[0][1] + 15)
+
 
         if self._previous_target != False:
             if abs(target[0] - self._previous_target[0]) > 30 and abs(
