@@ -32,6 +32,8 @@ class Selenium:
         # fp = webdriver.FirefoxProfile(r'C:\Users\den\AppData\Roaming\Mozilla\Firefox\Profiles\p84efvee.vegotchi1')
 
         options.add_extension('./utils/MetaMask.crx')
+        options.add_extension('./utils/Putin.crx')
+        options.add_extension('./utils/Hater.crx')
         self.driver = uc.Chrome(executable_path='./utils/chromedriver.exe',chrome_options=options)
         # driver = webdriver.Firefox(
         #     executable_path="utils\\geckodriver.exe",

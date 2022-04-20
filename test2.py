@@ -171,27 +171,27 @@ class AI:
         self._key_pressed_now = False
         self.wincap = kekwCapture()
         self.timer = 0
-        self.skipframes = 15
+        self.skipframes = 2
         self.crystals = {
             "green": {  # ^
-                "lower": [0, 220, 0],
-                "upper": [40, 248, 60]
+                "lower": [0, 255, 0],
+                "upper": [0, 255, 0]
             },
-            "lava": {  # ^daaaaaa
-                "lower": [190, 2, 0],
-                "upper": [248, 25, 25]
-            },
-            "ice": {  # ^d
-                "lower": [34, 240, 240],
-                "upper": [45, 254, 254]  # if very 30,254,253aa
-                #[248 249  32]
-                #[249 250  33]
-                #da
-            },
-            "purple": {  # ^
-                "lower": [122, 1, 247],
-                "upper": [185, 37, 254]
-            },
+            # "lava": {  # ^daaaaaa
+            #     "lower": [190, 2, 0],
+            #     "upper": [248, 25, 25]
+            # },
+            # "ice": {  # ^d
+            #     "lower": [34, 240, 240],
+            #     "upper": [45, 254, 254]  # if very 30,254,253aa
+            #     #[248 249  32]
+            #     #[249 250  33]
+            #     #da
+            # },
+            # "purple": {  # ^
+            #     "lower": [122, 1, 247],
+            #     "upper": [185, 37, 254]
+            # },
         }
         self._player = (961, 542)
         # m.move(-1920 + self._player[0], self._player[1])
@@ -263,8 +263,13 @@ class AI:
         return mask
 
     def _get_channels(self, image):
-        result = {}
+        result = []
         seing = []
+
+        mask = self._get_green_channel(image)
+        coords = cv.findNonZero(mask)
+        return coords
+
         if self.current_color:
             crystal = self.current_color
             result[crystal] = []
@@ -307,6 +312,7 @@ class AI:
                         seing.append(crystal)
                         # print(coords, crystal)a
                 # print(result, crystal)
+        print(seing)
         return result
 
     def _nearest_crystals(self, cords):
