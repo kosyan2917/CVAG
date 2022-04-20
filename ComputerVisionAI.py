@@ -234,9 +234,6 @@ class AI:
                             self._previous_target = False
                             self.current_color = False
                             print('stop')
-
-                            self._previous_target_frames = 0
-                            self._previous_target = False
                             self._reveal_key()
                             self._key_pressed_now = False
 
@@ -370,7 +367,9 @@ class AI:
     def _move(self, x, y, cyc_time):
         x_distance = x - self._player[0]
         y_distance = y - self._player[1]
-        if (abs(x_distance) < 100 and abs(y_distance < 100)):
+        abs_x_distance = abs(x_distance)
+        abs_y_distance = abs(y_distance)
+        if (abs_x_distance < 100 and abs_y_distance < 100):
             self.timer += cyc_time
         else:
             self.timer = 0
@@ -378,8 +377,17 @@ class AI:
             self._unstuck(x_distance, y_distance)
             return True
         else:
-
-            if abs(x_distance) > abs(y_distance):
+            # if 8 < abs_y_distance < 300:
+            #     if y_distance > 8:
+            #         key_to_press = 's'
+            #     else:
+            #         key_to_press = 'w'
+            # elif 8 < abs_x_distance < 300:
+            #     if x_distance > 8:
+            #         key_to_press = 'd'
+            #     else:
+            #         key_to_press = 'a'
+            if abs_x_distance > abs_y_distance:
                 if x_distance > 0:
                     key_to_press = 'd'
                 else:
@@ -429,6 +437,10 @@ class AI:
         self._hold_key(key_to_press_y, y_abs / (x_abs + y_abs))
 
         self._previous_target = False
+        self._previous_target_frames = 0
+        self.current_color = False
+        print('stop')
+        self._key_pressed_now = False
 
 
 if __name__ == "__main__":
