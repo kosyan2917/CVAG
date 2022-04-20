@@ -16,12 +16,12 @@ class AI:
 
         self.wincap = capture
 
-        self.skipframes = 15
+        self.skipframes = 1
 
         self.crystals = {
             "green": {  # ^
-                "lower": [37, 253, 60],
-                "upper": [37, 253, 60]
+                "lower": [36, 252, 59],
+                "upper": [38, 254, 61]
             },
             # "lava": {  # ^daaaaaa
             #     "lower": [190, 2, 0],
