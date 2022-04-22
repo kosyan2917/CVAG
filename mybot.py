@@ -12,12 +12,13 @@ from fake_useragent import UserAgent
 from selenium.webdriver.common.keys import Keys
 from collections import defaultdict
 from WindowCapture import WindowCapture
+
 import os
 import threading
 import undetected_chromedriver as uc
 from WindowCapture import *
 
-capture = kekwCapture()
+
 
 class Selenium:
     def __init__(self) -> None:
@@ -30,6 +31,8 @@ class Selenium:
         # options.set_preference('intl.accept_languages', 'en-US, en')
         # options.add_argument("--headless")
         options.add_argument("--force-color-profile=srgb")
+        options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        options.add_experimental_option('useAutomationExtension', False)
         # fp = webdriver.FirefoxProfile(r'C:\Users\den\AppData\Roaming\Mozilla\Firefox\Profiles\p84efvee.vegotchi1')
 
         options.add_extension('./utils/MetaMask.crx')
@@ -45,7 +48,7 @@ class Selenium:
         self.ac = ActionChains(self.driver)
         return self.driver
 
-    def take_element(self, path, timeout=20, delay=0):
+    def take_element(self, path, timeout=30, delay=0):
         element = ""
         try:
             element = WebDriverWait(self.driver, timeout).until(EC.element_to_be_clickable(("css selector", path)))
@@ -127,9 +130,11 @@ class Metamask(Selenium):
         time.sleep(2)
         
 class Aavegotchi(Metamask):
-    def __init__(self, driver, profile_name) -> None:
-        self.ai = AI(driver, capture)
+    def __init__(self, driver, profile_name, monitor_place) -> None:
+        self.ai = AI(driver, capture, monitor_place)
         self.driver = driver
+        driver.set_window_position(1920 + monitor_place[0], monitor_place[1], windowHandle='current')
+        self.driver.set_window_size(1920, 1080 + 70)
         self.profile_name = str(profile_name)
         self.crystals = {
             "green": {  # ^
@@ -194,7 +199,7 @@ class Aavegotchi(Metamask):
                 return True
     
     def _turn_off_everything(self):
-        settings = self.driver.find_element_by_xpath(".//button")  # Поиск настроек
+        settings = self.take_element(".settings-toggle")  # Поиск настроек
         settings.click()
         time.sleep(0.1)
         if self.driver.find_element_by_xpath(".//input[@class='jsx-1081654359']").is_selected():
@@ -210,7 +215,7 @@ class Aavegotchi(Metamask):
     
     def increase_vision(self):
         self.increase_measure()
-        extra_dom_elements = [".top-left-container", ".pocket-container", ".top-right-container", ".action-button-container", ".bottom-right-container"]
+        extra_dom_elements = [".top-left-container", ".users-health-container", ".action-button-container", ".bottom-right-container"]
         for el in extra_dom_elements:
             self.del_extra_element(el)
     
@@ -223,7 +228,7 @@ class Aavegotchi(Metamask):
             
         
 
-def worker(account):
+def worker(account, monitor_place):
     profile_name, mnemonic, password = account
     print("Start with:", profile_name, mnemonic, password)
 
@@ -245,10 +250,15 @@ def worker(account):
             break
         except Exception as e:
             print(e)
-    aavegotchi = Aavegotchi(driver, profile_name)
+    aavegotchi = Aavegotchi(driver, profile_name, monitor_place)
 
     while True:
         try:
+            print(len(driver.window_handles))
+            if len(driver.window_handles) > 1:
+                driver.switch_to.window(driver.window_handles[1])
+                driver.close()
+                driver.switch_to.window(driver.window_handles[0])
             aavegotchi.go_to_site().login()
             print('logged')
             if not aavegotchi.prepare_game():
@@ -273,8 +283,16 @@ if __name__ == "__main__":
     accounts = [(str(i + 1), mnemonics[i], "vegotchi" + str(i + 1)) for i in range(len(mnemonics))]
     print(accounts)
 
-    for acc in accounts:
-        threading.Thread(target=worker, args=(acc,)).start()
+    mon = [(0, 0, 1920, 1080), (1920, 0, 1920*2, 1080), (1920*2, 0, 1920*3, 1080), (1920*3, 0, 1920*4, 1080)]
+    capture = kekwCapture(0, 70, 1920*4, 1080+70)
+    # for acc in accounts:
+    threading.Thread(target=worker, args=(accounts[0],mon[0])).start()
+    time.sleep(30)
+    threading.Thread(target=worker, args=(accounts[1],mon[1])).start()
+    time.sleep(10)
+    threading.Thread(target=worker, args=(accounts[2],mon[2])).start()
+    time.sleep(10)
+    threading.Thread(target=worker, args=(accounts[3],mon[3])).start()
 
     while True:
         time.sleep(10)

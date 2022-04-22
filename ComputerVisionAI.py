@@ -1,5 +1,5 @@
 import time
-
+import datetime
 import win32api
 import win32con
 import threading
@@ -11,17 +11,19 @@ import numpy as np
 
 
 class AI:
-    def __init__(self, driver, capture):
+    def __init__(self, driver, capture, monitor_place = (0, 0, 1920, 1080)):
         self.driver = driver
+        self.monitor_place = monitor_place
 
         self.wincap = capture
 
         self.skipframes = 3
+        self.inventory = []
 
         self.crystals = {
             "green": {  # ^
-                "lower": [0, 255, 0],
-                "upper": [0, 255, 0]
+                "lower": [0, 0, 255],
+                "upper": [0, 0, 255]
             },
             # "lava": {  # ^daaaaaa
             #     "lower": [190, 2, 0],
@@ -39,7 +41,7 @@ class AI:
             #     "upper": [185, 37, 254]
             # },
         }
-        self._player = (961, 542)
+        self._player = (960, 540)
         self.action_key_down = {}
         self.action_key_up = {}
         self.action_key_down['w'] = ActionChains(driver).key_down("w")
@@ -59,7 +61,7 @@ class AI:
                 cyc_time_reset = False
 
 
-                screenshot = self.wincap.get_screenshot()
+                screenshot = self.wincap.get_screenshot(self.monitor_place)
                 # start1 = time.time()
                 coords = self._get_channels(screenshot)
                 # print("getcoords", time.time() - start1)
@@ -67,6 +69,7 @@ class AI:
                     print('exit&&&&&&&&&&&&&&&&&&&&&&&&')
                     break
                 if coords is not None:
+                    # print(coords)
 
                     target = self._nearest_crystals(coords)
                     cyc_time_reset = self._move(*target, cyc_time)
@@ -80,7 +83,7 @@ class AI:
 
                             self._previous_target_frames = 0
                             self._previous_target = False
-                            print('stop')
+                            # print('stop')
                             self._reveal_key()
                             self._key_pressed_now = False
                     else:
@@ -107,6 +110,11 @@ class AI:
         print('вышел из потока')
     
     def play(self):
+        kek = {2: "APLHA",
+               3:"KEK"}
+        inventory_p = self.driver.find_elements_by_xpath("//div[@class='jsx-2166988428 alchemica']/p")
+        for cryst in inventory_p:
+            self.inventory.append(float(cryst.text))
         self._previous_target = False
         self._previous_target_frames = 0
         self._key_pressed_now = False
@@ -120,7 +128,17 @@ class AI:
                 raise Exception('Game has broken')
             if self.errored_play:
                 raise Exception('Game has broken2')
-            time.sleep(1)
+
+            inventory_p = self.driver.find_elements_by_xpath("//div[@class='jsx-2166988428 alchemica']/p")
+            new_inv_change = []
+            for i in range(4):
+                new_inv_change.append(float(inventory_p[i].text) - self.inventory[i])
+                self.inventory[i] += new_inv_change[i]
+            for i in range(2,4):
+                if new_inv_change[i] != 0:
+                    print(round(new_inv_change[i], 1), kek[i],  datetime.datetime.now().strftime("%H:%M:%S"))
+            time.sleep(5)
+
             
     def _is_playing(self):
         el = self.driver.find_elements_by_css_selector(".portal")
@@ -294,7 +312,7 @@ class AI:
 
         self._previous_target = False
         self._previous_target_frames = 0
-        print('stop')
+        # print('stop')
         self._key_pressed_now = False
 
 
